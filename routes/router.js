@@ -1,5 +1,5 @@
 const express = require('express')
-const { register,loginuser,addTask,getalltasks,getallusers,getOneTask,edittask,deletetask} = require('../controllers/logic')
+const { register,loginuser,addTask,getalltasks,getallusers,getOneTask,edittask,deletetask,editStatus,getOnestatus} = require('../controllers/logic')
 
 const router=new express.Router()
 
@@ -26,6 +26,12 @@ router.get('/one-task/:id',getOneTask)
 
 // edit task edittask
 router.put('/edittask/:id',edittask)
+
+// get one status for user
+router.get('/one-status/:id',getOnestatus)
+
+// editStatus
+router.put('/editStatus/:id',editStatus)
 
 // delete task
 router.delete('/delete-task/:id',deletetask)

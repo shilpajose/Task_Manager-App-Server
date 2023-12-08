@@ -213,6 +213,41 @@ deletetask = (req, res) => {
         }
     })
 }
+
+// getOnestatus 
+getOnestatus = (req, res) => {
+    const { id } = req.params
+    tasklists.findOne({ _id: id }).then(status => {
+        if (status) {
+            res.status(200).json({
+                message: status.taskstatus,
+                statucode: 200,
+                status: true
+            })
+        } else {
+            res.status(404).json({
+                message: "no data",
+                status: false,
+                statusCode: 404
+            })
+        }
+    })
+}
+// edit status
+editStatus = (req, res) => {
+    const { id } = req.params
+    const {  taskstatus } = req.body
+    tasklists.findOne({ _id: id }).then(data => {
+            data.taskstatus = taskstatus
+        data.save()
+        res.status(200).json({
+            message: data,
+            status: true,
+            statusCode: 200
+        })
+
+    })
+}
 module.exports = {
-    register, loginuser, addTask, getalltasks, getallusers, getOneTask, edittask,deletetask
+    register, loginuser, addTask, getalltasks, getallusers, getOneTask, edittask,deletetask,editStatus,getOnestatus
 }
